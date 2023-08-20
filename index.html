@@ -1,28 +1,43 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE HTML>
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Makaleler</title>
+    <script>window.onload = function () {
+
+var options = {
+	title: {
+		text: "Desktop OS Market Share in 2017"
+	},
+	subtitles: [{
+		text: "As of November, 2017"
+	}],
+	animationEnabled: true,
+	data: [{
+		type: "pie",
+		startAngle: 40,
+		toolTipContent: "<b>{label}</b>: {y}%",
+		showInLegend: "true",
+		legendText: "{label}",
+		indexLabelFontSize: 16,
+		indexLabel: "{label} - {y}%",
+		dataPoints: [
+			{ y: 48.36, label: "Windows 7" },
+			{ y: 26.85, label: "Windows 10" },
+			{ y: 1.49, label: "Windows 8" },
+			{ y: 6.98, label: "Windows XP" },
+			{ y: 6.53, label: "Windows 8.1" },
+			{ y: 2.45, label: "Linux" },
+			{ y: 3.32, label: "Mac OS X 10.12" },
+			{ y: 4.03, label: "Others" }
+		]
+	}]
+};
+$("#chartContainer").CanvasJSChart(options);
+
+}</script>
 </head>
 <body>
-    <h1>Makaleler</h1>
-    <ul>
-        <li>
-            <h2><a href="makale1.html">Makale Başlığı 1</a></h2>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed eleifend enim eu odio aliquam, vel fringilla ligula aliquet.</p>
-            <p>Ut a diam ac libero interdum tristique. Nunc rhoncus, dui vel dictum vestibulum, sapien mi luctus dui, et fringilla mi risus ut leo.</p>
-        </li>
-        <li>
-            <h2><a href="makale2.html">Makale Başlığı 2</a></h2>
-            <p>Nullam vel odio ac ipsum aliquam elementum nec nec ex. Suspendisse potenti. Sed viverra tortor et est venenatis gravida.</p>
-            <p>Fusce a sapien ac orci feugiat facilisis. In hac habitasse platea dictumst. Sed blandit quam at pharetra interdum.</p>
-        </li>
-        <li>
-            <h2><a href="makale3.html">Makale Başlığı 3</a></h2>
-            <p>Curabitur egestas nunc in sollicitudin varius. Integer finibus, nulla eget eleifend venenatis, ante odio venenatis ligula.</p>
-            <p>Proin in leo vel justo lacinia ultrices. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.</p>
-        </li>
-    </ul>
+    <div id="chartContainer" style="height: 370px; max-width: 920px; margin: 0px auto;"></div>
+    <script src="https://canvasjs.com/assets/script/jquery-1.11.1.min.js"></script>
+    <script src="https://canvasjs.com/assets/script/jquery.canvasjs.min.js"></script>
 </body>
 </html>
