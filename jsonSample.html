@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <script>
+$(document).ready(function(){
+ $("#driver").click(function(event){
+               $.getJSON('data.json', function(jd) {
+                  $('#stage').html('<p> Name: ' + jd.name + '</p>');
+                  $('#stage').append('<p>Age : ' + jd.age+ '</p>');
+                  $('#stage').append('<p> Sex: ' + jd.sex+ '</p>');
+               });
+            });
+});
+    </script>
+</head>
+<body>
+
+    <p>Click on the button to load result.html file:</p>
+
+    <div id="stage" style="background-color:#cc0;">
+        STAGE
+    </div>
+
+    <input type="button" id="driver" value="Load Data" />
+
+</body>
+</html>
