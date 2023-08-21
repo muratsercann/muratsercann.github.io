@@ -3,83 +3,149 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Navbar and Table with Horizontal Scroll</title>
+    <title>Günlük Ders Çalışma Bilgileri</title>
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <style>
-        /* Tablo stilini özelleştir */
-        .table-container {
-            max-width: 100%;
-            overflow-x: auto;
+        /* Ana stil ayarları */
+        body {
+            background-color: #f8f9fa;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            padding: 20px;
+        }
+
+        /* Başlık stili */
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        /* Kart stil ayarları */
+        .card {
+            margin-bottom: 20px;
+            border: none;
+        }
+
+        .card-header {
+            background-color: #343a40;
+            color: white;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        .card-body {
+            padding: 10px;
+        }
+
+        /* Zaman çizgi stili */
+        .time-line {
+            position: relative;
+            width: 5px;
+            background-color: #6c757d;
+            margin-left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .time-line::after {
+            content: '';
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background-color: #6c757d;
+            border-radius: 50%;
+            top: -3px;
+            left: -3px;
+        }
+
+        /* Ders stil ayarları */
+        .lesson {
+            position: relative;
+            padding-left: 20px;
+            margin-bottom: 15px;
+        }
+
+        .lesson::before {
+            content: '';
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background-color: #17a2b8;
+            border-radius: 50%;
+            top: 3px;
+            left: 0;
+        }
+
+        /* Ayraç stili */
+        .separator {
+            margin: 20px 0;
+            border-bottom: 1px solid #dee2e6;
         }
     </style>
+
+    <script>
+         function createCard(data){
+            
+            // data = {Date : "20.08.2023" , Data : 
+            // [{ Saat_1 : "13:30" , Saat_2 : "14:45" , Ders : "TYTMAT" , Konu : "Temel Sayılar" } , 
+            // { Saat_1 : "15:30" , Saat_2 : "15:45" , Ders : "TYTTUR" , Konu : "Ses Bilgisi" }]};
+            
+          
+            var cardSablon = " <div class='card'>"
+            +"       <div class='card-header'>                     "
+            +"           @tarih                     "
+            +"       </div>                                        "
+            +"       <div class='card-body'>                       "
+            +"           <div class='time-line'></div>             "
+            +"               @lessons                                      "
+            +"                                            "
+            +"           <!-- Daha fazla ders eklenebilir -->      "
+            +"       </div>                                        "
+            +"   </div>                                            "  
+         
+         var lessonSablon =  "           <div class='lesson'>                      "
+            +"               <p><strong>@hour1 - @hour2</strong></p> "
+            +"               <p>@subject</p>       "
+            +"           </div>                                    ";
+
+           
+            var lessons = "";
+
+            for(let i = 0 ; i< data.Data.length ; i++){
+                lessons = lessonSablon.replace(/@hour1/g, data.Data[i].Saat_1);
+                lessons = lessons.replace(/@hour2/g, data.Data[i].Saat_2);
+                lessons = lessons.replace(/@subject/g, (data.Data[i].Ders + data.Data[i].Konu));
+            }
+
+            var card = cardSablon.replace(/@tarih/g, data.Date);
+            card = card.replace(/@lessons/g,lessons);
+            console.log(card);
+         }
+  </script>
 </head>
 <body>
-    <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <div class="container">
-            <a class="navbar-brand" href="#">Navbar</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav">
-                    <li class="nav-item active">
-                        <a class="nav-link" href="#">Ana Sayfa <span class="sr-only">(current)</span></a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Link</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Link</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
-                    </li>
-                </ul>
+    <div class="container">
+        <h1>Günlük Ders Çalışma Bilgileri</h1>
+       
+        <div class="separator"></div>
+        <div class="card">
+            <div class="card-header">
+                Salı, 22 Ağustos
+            </div>
+            <div class="card-body">
+                <div class="time-line"></div>
+                <div class="lesson">
+                    <p><strong>10:00 - 12:00</strong></p>
+                    <p>Tarih - Ortaçağ Avrupası</p>
+                </div>
+                <!-- Daha fazla ders eklenebilir -->
             </div>
         </div>
-    </nav>
-
-    <!-- Tablo -->
-    <div id="mainContent" class="container mt-5">
-        <div class="row justify-content-center">
-            <div class="col-md-10 table-container">
-                <table class="table table-bordered">
-                    <thead>
-                        <tr>
-                            <th scope="col">#</th>
-                            <th scope="col">Sütun 1</th>
-                            <th scope="col">Sütun 2</th>
-                            <th scope="col">Sütun 3</th>
-                            <th scope="col">Sütun 4</th>
-                            <th scope="col">Sütun 5</th>
-                            <th scope="col">Sütun 6</th>
-                            <th scope="col">Sütun 7</th>
-                            <th scope="col">Sütun 8</th>
-                            <th scope="col">Sütun 9</th>
-                            <th scope="col">Sütun 10</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <th scope="row">1</th>
-                            <td>Veri 1</td>
-                            <td>Veri 2</td>
-                            <td>Veri 3</td>
-                            <td>Veri 4</td>
-                            <td>Veri 5</td>
-                            <td>Veri 6</td>
-                            <td>Veri 7</td>
-                            <td>Veri 8</td>
-                            <td>Veri 9</td>
-                            <td>Veri 10</td>
-                        </tr>
-                        <!-- Daha fazla satır eklenebilir -->
-                    </tbody>
-                </table>
-            </div>
-        </div>
+        <!-- Daha fazla gün eklenebilir -->
     </div>
 
     <!-- Bootstrap JS (optional) -->
