@@ -60,7 +60,7 @@
                             <th>Ders</th>
                             <th>Konu</th>
                             <th>Konu Çalışması</th>
-                            <th>Süre</th>
+                            <th>Soru</th>
                         </tr>
                     </thead>
                     <tbody id="tableBody">
@@ -111,8 +111,8 @@
                         <input type="text" class="form-control" id="editKonuCalisma">
                     </div>
                     <div class="form-group">
-                        <label for="editSure">Süre</label>
-                        <input type="text" class="form-control" id="editSure">
+                        <label for="editSoru">Soru</label>
+                        <input type="text" class="form-control" id="editSoru">
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -129,59 +129,57 @@
     
     <script>
         // Örnek veriler
-        var data = [
-    { tarih: "2023-08-21", saat1: "09:00", saat2: "11:00", ders: "Matematik", konu: "Trigonometri", konuCalisma: "Problem Set 2", sure: "2 saat" },
-    { tarih: "2023-08-22", saat1: "14:00", saat2: "16:00", ders: "Fizik", konu: "Mekanik", konuCalisma: "Ödev Çözümü", sure: "2 saat" },
-    { tarih: "2023-08-23", saat1: "10:00", saat2: "12:00", ders: "Tarih", konu: "Ortaçağ Avrupası", konuCalisma: "Kitap Okuma", sure: "2 saat" },
-    { tarih: "2023-08-24", saat1: "13:30", saat2: "15:30", ders: "Kimya", konu: "Kimyasal Reaksiyonlar", konuCalisma: "Deney Yapma", sure: "2 saat" },
-    { tarih: "2023-08-25", saat1: "16:00", saat2: "18:00", ders: "Biyoloji", konu: "Hücre Bölünmesi", konuCalisma: "Sunum Hazırlığı", sure: "2 saat" },
-    { tarih: "2023-08-26", saat1: "09:00", saat2: "11:00", ders: "Edebiyat", konu: "Roman Analizi", konuCalisma: "Metin İncelemesi", sure: "2 saat" },
-    { tarih: "2023-08-27", saat1: "14:00", saat2: "16:00", ders: "Müzik", konu: "Klasik Besteciler", konuCalisma: "Dinleme Pratiği", sure: "2 saat" },
-    { tarih: "2023-08-28", saat1: "10:00", saat2: "12:00", ders: "Felsefe", konu: "Etik Teorileri", konuCalisma: "Soruları Çözme", sure: "2 saat" },
-    { tarih: "2023-08-29", saat1: "13:30", saat2: "15:30", ders: "Bilgisayar Bilimleri", konu: "Algoritma Analizi", konuCalisma: "Kodlama Egzersizi", sure: "2 saat" },
-    { tarih: "2023-08-30", saat1: "16:00", saat2: "18:00", ders: "Yabancı Dil", konu: "Kelime Ezberleme", konuCalisma: "Flash Kartlar", sure: "2 saat" },
-    { tarih: "2023-08-31", saat1: "09:00", saat2: "11:00", ders: "Matematik", konu: "Cebir", konuCalisma: "Problem Set 3", sure: "2 saat" },
-    { tarih: "2023-09-01", saat1: "14:00", saat2: "16:00", ders: "Fizik", konu: "Termodinamik", konuCalisma: "Formül Çalışması", sure: "2 saat" },
-    { tarih: "2023-09-02", saat1: "10:00", saat2: "12:00", ders: "Tarih", konu: "20. Yüzyıl Savaşları", konuCalisma: "Sunum Hazırlığı", sure: "2 saat" },
-    { tarih: "2023-09-03", saat1: "13:30", saat2: "15:30", ders: "Kimya", konu: "Moleküler Yapılar", konuCalisma: "Deney Raporu", sure: "2 saat" },
-    { tarih: "2023-09-04", saat1: "16:00", saat2: "18:00", ders: "Biyoloji", konu: "Genetik", konuCalisma: "Problem Set 1", sure: "2 saat" },
-    { tarih: "2023-09-05", saat1: "09:00", saat2: "11:00", ders: "Edebiyat", konu: "Şiir Analizi", konuCalisma: "Metin İncelemesi", sure: "2 saat" },
-    { tarih: "2023-09-06", saat1: "14:00", saat2: "16:00", ders: "Müzik", konu: "Opera Tarihi", konuCalisma: "Dinleme Pratiği", sure: "2 saat" },
-    { tarih: "2023-09-07", saat1: "10:00", saat2: "12:00", ders: "Felsefe", konu: "Varlık Felsefesi", konuCalisma: "Soruları Çözme", sure: "2 saat" },
-    { tarih: "2023-09-08", saat1: "13:30", saat2: "15:30", ders: "Bilgisayar Bilimleri", konu: "Veri Yapıları", konuCalisma: "Kodlama Egzersizi", sure: "2 saat" },
-    { tarih: "2023-09-09", saat1: "16:00", saat2: "18:00", ders: "Yabancı Dil", konu: "Konuşma Pratiği", konuCalisma: "Diyaloglar", sure: "2 saat" },
-    { tarih: "2023-09-10", saat1: "09:30", saat2: "11:30", ders: "İngilizce", konu: "Gramer Kuralları", konuCalisma: "Quiz Çözümü", sure: "2 saat" },
-    { tarih: "2023-09-11", saat1: "14:30", saat2: "16:30", ders: "Coğrafya", konu: "Nüfus Dağılımı", konuCalisma: "Harita Çalışması", sure: "2 saat" },
-    { tarih: "2023-09-12", saat1: "10:00", saat2: "12:00", ders: "Tarih", konu: "Antik Yunan", konuCalisma: "Araştırma", sure: "2 saat" },
-    { tarih: "2023-09-13", saat1: "13:30", saat2: "15:30", ders: "Kimya", konu: "Periyodik Tablo", konuCalisma: "Öğrenci Sunumu", sure: "2 saat" },
-    { tarih: "2023-09-14", saat1: "16:00", saat2: "18:00", ders: "Biyoloji", konu: "Evrim", konuCalisma: "Debate Hazırlığı", sure: "2 saat" },
-    { tarih: "2023-09-15", saat1: "09:00", saat2: "11:00", ders: "Edebiyat", konu: "Dram Sanatı", konuCalisma: "Oyun İncelemesi", sure: "2 saat" },
-    { tarih: "2023-09-16", saat1: "14:00", saat2: "16:00", ders: "Müzik", konu: "Jazz Tarihi", konuCalisma: "Dinleme Pratiği", sure: "2 saat" },
-    { tarih: "2023-09-17", saat1: "10:00", saat2: "12:00", ders: "Felsefe", konu: "Epistemoloji", konuCalisma: "Metin Analizi", sure: "2 saat" },
-    { tarih: "2023-09-18", saat1: "13:30", saat2: "15:30", ders: "Bilgisayar Bilimleri", konu: "Ağ Programlama", konuCalisma: "Kodlama Egzersizi", sure: "2 saat" },
-    { tarih: "2023-09-19", saat1: "16:00", saat2: "18:00", ders: "Yabancı Dil", konu: "Okuma Pratiği", konuCalisma: "Hikaye Analizi", sure: "2 saat" },
-    { tarih: "2023-09-20", saat1: "09:00", saat2: "11:00", ders: "Matematik", konu: "Analitik Geometri", konuCalisma: "Örnek Problemler", sure: "2 saat" },
-    { tarih: "2023-09-21", saat1: "14:00", saat2: "16:00", ders: "Fizik", konu: "Elektromanyetizma", konuCalisma: "Deney Hazırlığı", sure: "2 saat" },
-    { tarih: "2023-09-22", saat1: "10:00", saat2: "12:00", ders: "Tarih", konu: "Modern Dönem", konuCalisma: "Sunum Hazırlığı", sure: "2 saat" },
-    { tarih: "2023-09-23", saat1: "13:30", saat2: "15:30", ders: "Kimya", konu: "Kimyasal Bağlar", konuCalisma: "Molekül Modelleri", sure: "2 saat" },
-    { tarih: "2023-09-24", saat1: "16:00", saat2: "18:00", ders: "Biyoloji", konu: "Ekosistemler", konuCalisma: "Saha Araştırması", sure: "2 saat" },
-    { tarih: "2023-09-25", saat1: "09:00", saat2: "11:00", ders: "Edebiyat", konu: "Eleştiri Yazısı", konuCalisma: "Metin İncelemesi", sure: "2 saat" },
-    { tarih: "2023-09-26", saat1: "14:00", saat2: "16:00", ders: "Müzik", konu: "Popüler Müzik", konuCalisma: "Dinleme Pratiği", sure: "2 saat" },
-    { tarih: "2023-09-27", saat1: "10:00", saat2: "12:00", ders: "Felsefe", konu: "Metafizik", konuCalisma: "Kavram Analizi", sure: "2 saat" },
-    { tarih: "2023-09-28", saat1: "13:30", saat2: "15:30", ders: "Bilgisayar Bilimleri", konu: "Veritabanı Yönetimi", konuCalisma: "SQL Sorguları", sure: "2 saat" },
-    { tarih: "2023-09-29", saat1: "16:00", saat2: "18:00", ders: "Yabancı Dil", konu: "Yazma Pratiği", konuCalisma: "Kompozisyon", sure: "2 saat" },
-    { tarih: "2023-09-30", saat1: "09:00", saat2: "11:00", ders: "Matematik", konu: "Limit ve Süreklilik", konuCalisma: "Örnek Problemler", sure: "2 saat" },
-    { tarih: "2023-10-01", saat1: "14:00", saat2: "16:00", ders: "Fizik", konu: "Modern Fizik", konuCalisma: "Konu Özeti", sure: "2 saat" },
-    { tarih: "2023-10-02", saat1: "10:00", saat2: "12:00", ders: "Tarih", konu: "İslam Tarihi", konuCalisma: "Kitap Okuma", sure: "2 saat" },
-    { tarih: "2023-10-03", saat1: "13:30", saat2: "15:30", ders: "Kimya", konu: "Asit-Baz Denge", konuCalisma: "Deney Yapma", sure: "2 saat" },
-    { tarih: "2023-10-04", saat1: "16:00", saat2: "18:00", ders: "Biyoloji", konu: "Hormonlar", konuCalisma: "Sunum Hazırlığı", sure: "2 saat" },
-    { tarih: "2023-10-05", saat1: "09:00", saat2: "11:00", ders: "Edebiyat", konu: "Roman Analizi", konuCalisma: "Karşılaştırmalı Analiz", sure: "2 saat" },
-    { tarih: "2023-10-06", saat1: "14:00", saat2: "16:00", ders: "Müzik", konu: "Klasik Müzik", konuCalisma: "Dinleme Pratiği", sure: "2 saat" },
-    { tarih: "2023-10-07", saat1: "10:00", saat2: "12:00", ders: "Felsefe", konu: "Siyaset Felsefesi", konuCalisma: "Makale Okuma", sure: "2 saat" },
-    { tarih: "2023-10-08", saat1: "13:30", saat2: "15:30", ders: "Bilgisayar Bilimleri", konu: "Web Programlama", konuCalisma: "HTML ve CSS", sure: "2 saat" },
-    { tarih: "2023-10-09", saat1: "16:00", saat2: "18:00", ders: "Yabancı Dil", konu: "Kelime Ezberleme", konuCalisma: "Sesli Telaffuz", sure: "2 saat" }
+        var data = [{ tarih: "2023-08-21", saat1: "09:00", saat2: "11:00", ders: "Matematik", konu: "Trigonometri", konuCalisma: "Problem Set 2", soru : 45 },
+    { tarih: "2023-08-22", saat1: "14:00", saat2: "16:00", ders: "Fizik", konu: "Mekanik", konuCalisma: "Ödev Çözümü", soru : 45 },
+    { tarih: "2023-08-23", saat1: "10:00", saat2: "12:00", ders: "Tarih", konu: "Ortaçağ Avrupası", konuCalisma: "Kitap Okuma", soru : 45 },
+    { tarih: "2023-08-24", saat1: "13:30", saat2: "15:30", ders: "Kimya", konu: "Kimyasal Reaksiyonlar", konuCalisma: "Deney Yapma", soru : 45 },
+    { tarih: "2023-08-25", saat1: "16:00", saat2: "18:00", ders: "Biyoloji", konu: "Hücre Bölünmesi", konuCalisma: "Sunum Hazırlığı", soru : 45 },
+    { tarih: "2023-08-26", saat1: "09:00", saat2: "11:00", ders: "Edebiyat", konu: "Roman Analizi", konuCalisma: "Metin İncelemesi", soru : 45 },
+    { tarih: "2023-08-27", saat1: "14:00", saat2: "16:00", ders: "Müzik", konu: "Klasik Besteciler", konuCalisma: "Dinleme Pratiği", soru : 45 },
+    { tarih: "2023-08-28", saat1: "10:00", saat2: "12:00", ders: "Felsefe", konu: "Etik Teorileri", konuCalisma: "Soruları Çözme", soru : 45 },
+    { tarih: "2023-08-29", saat1: "13:30", saat2: "15:30", ders: "Bilgisayar Bilimleri", konu: "Algoritma Analizi", konuCalisma: "Kodlama Egzersizi", soru : 45 },
+    { tarih: "2023-08-30", saat1: "16:00", saat2: "18:00", ders: "Yabancı Dil", konu: "Kelime Ezberleme", konuCalisma: "Flash Kartlar", soru : 45 },
+    { tarih: "2023-08-31", saat1: "09:00", saat2: "11:00", ders: "Matematik", konu: "Cebir", konuCalisma: "Problem Set 3", soru : 45 },
+    { tarih: "2023-09-01", saat1: "14:00", saat2: "16:00", ders: "Fizik", konu: "Termodinamik", konuCalisma: "Formül Çalışması", soru : 45 },
+    { tarih: "2023-09-02", saat1: "10:00", saat2: "12:00", ders: "Tarih", konu: "20. Yüzyıl Savaşları", konuCalisma: "Sunum Hazırlığı", soru : 45 },
+    { tarih: "2023-09-03", saat1: "13:30", saat2: "15:30", ders: "Kimya", konu: "Moleküler Yapılar", konuCalisma: "Deney Raporu", soru : 45 },
+    { tarih: "2023-09-04", saat1: "16:00", saat2: "18:00", ders: "Biyoloji", konu: "Genetik", konuCalisma: "Problem Set 1", soru : 45 },
+    { tarih: "2023-09-05", saat1: "09:00", saat2: "11:00", ders: "Edebiyat", konu: "Şiir Analizi", konuCalisma: "Metin İncelemesi", soru : 45 },
+    { tarih: "2023-09-06", saat1: "14:00", saat2: "16:00", ders: "Müzik", konu: "Opera Tarihi", konuCalisma: "Dinleme Pratiği", soru : 45 },
+    { tarih: "2023-09-07", saat1: "10:00", saat2: "12:00", ders: "Felsefe", konu: "Varlık Felsefesi", konuCalisma: "Soruları Çözme", soru : 45 },
+    { tarih: "2023-09-08", saat1: "13:30", saat2: "15:30", ders: "Bilgisayar Bilimleri", konu: "Veri Yapıları", konuCalisma: "Kodlama Egzersizi", soru : 45 },
+    { tarih: "2023-09-09", saat1: "16:00", saat2: "18:00", ders: "Yabancı Dil", konu: "Konuşma Pratiği", konuCalisma: "Diyaloglar", soru : 45 },
+    { tarih: "2023-09-10", saat1: "09:30", saat2: "11:30", ders: "İngilizce", konu: "Gramer Kuralları", konuCalisma: "Quiz Çözümü", soru : 45 },
+    { tarih: "2023-09-11", saat1: "14:30", saat2: "16:30", ders: "Coğrafya", konu: "Nüfus Dağılımı", konuCalisma: "Harita Çalışması", soru : 45 },
+    { tarih: "2023-09-12", saat1: "10:00", saat2: "12:00", ders: "Tarih", konu: "Antik Yunan", konuCalisma: "Araştırma", soru : 45 },
+    { tarih: "2023-09-13", saat1: "13:30", saat2: "15:30", ders: "Kimya", konu: "Periyodik Tablo", konuCalisma: "Öğrenci Sunumu", soru : 45 },
+    { tarih: "2023-09-14", saat1: "16:00", saat2: "18:00", ders: "Biyoloji", konu: "Evrim", konuCalisma: "Debate Hazırlığı", soru : 45 },
+    { tarih: "2023-09-15", saat1: "09:00", saat2: "11:00", ders: "Edebiyat", konu: "Dram Sanatı", konuCalisma: "Oyun İncelemesi", soru : 45 },
+    { tarih: "2023-09-16", saat1: "14:00", saat2: "16:00", ders: "Müzik", konu: "Jazz Tarihi", konuCalisma: "Dinleme Pratiği", soru : 45 },
+    { tarih: "2023-09-17", saat1: "10:00", saat2: "12:00", ders: "Felsefe", konu: "Epistemoloji", konuCalisma: "Metin Analizi", soru : 45 },
+    { tarih: "2023-09-18", saat1: "13:30", saat2: "15:30", ders: "Bilgisayar Bilimleri", konu: "Ağ Programlama", konuCalisma: "Kodlama Egzersizi", soru : 45 },
+    { tarih: "2023-09-19", saat1: "16:00", saat2: "18:00", ders: "Yabancı Dil", konu: "Okuma Pratiği", konuCalisma: "Hikaye Analizi", soru : 45 },
+    { tarih: "2023-09-20", saat1: "09:00", saat2: "11:00", ders: "Matematik", konu: "Analitik Geometri", konuCalisma: "Örnek Problemler", soru : 45 },
+    { tarih: "2023-09-21", saat1: "14:00", saat2: "16:00", ders: "Fizik", konu: "Elektromanyetizma", konuCalisma: "Deney Hazırlığı", soru : 45 },
+    { tarih: "2023-09-22", saat1: "10:00", saat2: "12:00", ders: "Tarih", konu: "Modern Dönem", konuCalisma: "Sunum Hazırlığı", soru : 45 },
+    { tarih: "2023-09-23", saat1: "13:30", saat2: "15:30", ders: "Kimya", konu: "Kimyasal Bağlar", konuCalisma: "Molekül Modelleri", soru : 45 },
+    { tarih: "2023-09-24", saat1: "16:00", saat2: "18:00", ders: "Biyoloji", konu: "Ekosistemler", konuCalisma: "Saha Araştırması", soru : 45 },
+    { tarih: "2023-09-25", saat1: "09:00", saat2: "11:00", ders: "Edebiyat", konu: "Eleştiri Yazısı", konuCalisma: "Metin İncelemesi", soru : 45 },
+    { tarih: "2023-09-26", saat1: "14:00", saat2: "16:00", ders: "Müzik", konu: "Popüler Müzik", konuCalisma: "Dinleme Pratiği", soru : 45 },
+    { tarih: "2023-09-27", saat1: "10:00", saat2: "12:00", ders: "Felsefe", konu: "Metafizik", konuCalisma: "Kavram Analizi", soru : 45 },
+    { tarih: "2023-09-28", saat1: "13:30", saat2: "15:30", ders: "Bilgisayar Bilimleri", konu: "Veritabanı Yönetimi", konuCalisma: "SQL Sorguları", soru : 45 },
+    { tarih: "2023-09-29", saat1: "16:00", saat2: "18:00", ders: "Yabancı Dil", konu: "Yazma Pratiği", konuCalisma: "Kompozisyon", soru : 45 },
+    { tarih: "2023-09-30", saat1: "09:00", saat2: "11:00", ders: "Matematik", konu: "Limit ve Süreklilik", konuCalisma: "Örnek Problemler", soru : 45 },
+    { tarih: "2023-10-01", saat1: "14:00", saat2: "16:00", ders: "Fizik", konu: "Modern Fizik", konuCalisma: "Konu Özeti", soru : 45 },
+    { tarih: "2023-10-02", saat1: "10:00", saat2: "12:00", ders: "Tarih", konu: "İslam Tarihi", konuCalisma: "Kitap Okuma", soru : 45 },
+    { tarih: "2023-10-03", saat1: "13:30", saat2: "15:30", ders: "Kimya", konu: "Asit-Baz Denge", konuCalisma: "Deney Yapma", soru : 45 },
+    { tarih: "2023-10-04", saat1: "16:00", saat2: "18:00", ders: "Biyoloji", konu: "Hormonlar", konuCalisma: "Sunum Hazırlığı", soru : 45 },
+    { tarih: "2023-10-05", saat1: "09:00", saat2: "11:00", ders: "Edebiyat", konu: "Roman Analizi", konuCalisma: "Karşılaştırmalı Analiz", soru : 45 },
+    { tarih: "2023-10-06", saat1: "14:00", saat2: "16:00", ders: "Müzik", konu: "Klasik Müzik", konuCalisma: "Dinleme Pratiği", soru : 45 },
+    { tarih: "2023-10-07", saat1: "10:00", saat2: "12:00", ders: "Felsefe", konu: "Siyaset Felsefesi", konuCalisma: "Makale Okuma", soru : 45 },
+    { tarih: "2023-10-08", saat1: "13:30", saat2: "15:30", ders: "Bilgisayar Bilimleri", konu: "Web Programlama", konuCalisma: "HTML ve CSS", soru : 45 },
+    { tarih: "2023-10-09", saat1: "16:00", saat2: "18:00", ders: "Yabancı Dil", konu: "Kelime Ezberleme", konuCalisma: "Sesli Telaffuz", soru : 45 }
 ];
-
 
         var itemsPerPage = 10;
         var currentPage = 1;
@@ -198,7 +196,7 @@ function openEditModal(index) {
     $("#editDers").val(item.ders);
     $("#editKonu").val(item.konu);
     $("#editKonuCalisma").val(item.konuCalisma);
-    $("#editSure").val(item.sure);
+    $("#editSoru").val(item.soru);
 
     $("#editModal").modal("show"); // Modalı aç
 }
@@ -216,7 +214,7 @@ function openEditModal(index) {
                 row += "<td>" + data[i].ders + "</td>";
                 row += "<td>" + data[i].konu + "</td>";
                 row += "<td>" + data[i].konuCalisma + "</td>";
-                row += "<td>" + data[i].sure + "</td>";
+                row += "<td>" + data[i].soru + "</td>";
                 // Düzenleme ikonu ve popup tetikleyici eklendi
                 row += "<td><button class='btn btn-link edit-button' data-toggle='modal' data-target='#editModal' onclick='openEditModal(" + i + ")'><i class='fas fa-edit'></i>edit</button></td>";
 
@@ -235,7 +233,7 @@ function openEditModal(index) {
                 editModal.find("#editDers").val(data[index].ders);
                 editModal.find("#editKonu").val(data[index].konu);
                 editModal.find("#editKonuCalisma").val(data[index].konuCalisma);
-                editModal.find("#editSure").val(data[index].sure);
+                editModal.find("#editSoru").val(data[index].soru);
                 editModal.find("#editIndex").val(index);
             });
 
@@ -248,7 +246,7 @@ function openEditModal(index) {
             data[index].ders = $("#editDers").val();
             data[index].konu = $("#editKonu").val();
             data[index].konuCalisma = $("#editKonuCalisma").val();
-            data[index].sure = $("#editSure").val();
+            data[index].soru = $("#editSoru").val();
             updateTable(currentPage);
         });
 
