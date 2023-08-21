@@ -1,9 +1,5 @@
  
         
-        
-         
-         
-
          $(document).ready(function() {
         
             var data = getTestData(); 
@@ -17,7 +13,7 @@
                  formElements.forEach(element => {
                      cardInfo += `${element.previousElementSibling.innerText}: ${element.value}\n`;
                  });
-                 alert("Şimdilik Detay Yok !");
+                //  alert("Şimdilik Detay Yok !");
              });
          });
 
