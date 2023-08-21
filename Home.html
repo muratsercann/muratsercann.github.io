@@ -86,8 +86,12 @@
             border-bottom: 1px solid #dee2e6;
         }
     </style>
-
+  <!-- Bootstrap JS (optional) -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script>
+         
          function createCard(data){
             
             // data = {Date : "20.08.2023" , Data : 
@@ -109,30 +113,44 @@
          
          var lessonSablon =  "           <div class='lesson'>                      "
             +"               <p><strong>@hour1 - @hour2</strong></p> "
-            +"               <p>@subject</p>       "
+            +"               <p>@lesson - @subject</p>       "
             +"           </div>                                    ";
 
            
             var lessons = "";
 
             for(let i = 0 ; i< data.Data.length ; i++){
-                lessons = lessonSablon.replace(/@hour1/g, data.Data[i].Saat_1);
-                lessons = lessons.replace(/@hour2/g, data.Data[i].Saat_2);
-                lessons = lessons.replace(/@subject/g, (data.Data[i].Ders + data.Data[i].Konu));
+                var les = lessonSablon.replace(/@hour1/g, data.Data[i].Saat_1);
+                les = les.replace(/@hour2/g, data.Data[i].Saat_2);
+                les = les.replace(/@lesson/g, (data.Data[i].Ders));
+                les = les.replace(/@subject/g, (data.Data[i].Konu));
+
+                lessons += les;
             }
 
             var card = cardSablon.replace(/@tarih/g, data.Date);
             card = card.replace(/@lessons/g,lessons);
             console.log(card);
+            return card;
          }
-  </script>
+        
+         $(document).ready(function() {
+           var data = {Date : "20.08.2023" , Data : 
+            [{ Saat_1 : "13:30" , Saat_2 : "14:45" , Ders : "TYTMAT" , Konu : "Temel Sayılar" } , 
+            { Saat_1 : "15:30" , Saat_2 : "15:45" , Ders : "TYTTUR" , Konu : "Ses Bilgisi" }]};
+    
+            var str = createCard(data);
+            var mainContent = document.getElementById("mainContent");
+            mainContent.innerHTML += str;
+        });
+ </script>
 </head>
 <body>
-    <div class="container">
+    <div id="mainContent" class="container">
         <h1>Günlük Ders Çalışma Bilgileri</h1>
        
-        <div class="separator"></div>
-        <div class="card">
+        <!-- <div class="separator"></div> -->
+        <!-- <div class="card">
             <div class="card-header">
                 Salı, 22 Ağustos
             </div>
@@ -142,15 +160,12 @@
                     <p><strong>10:00 - 12:00</strong></p>
                     <p>Tarih - Ortaçağ Avrupası</p>
                 </div>
-                <!-- Daha fazla ders eklenebilir -->
+                 Daha fazla ders eklenebilir 
             </div>
-        </div>
+        </div> -->
         <!-- Daha fazla gün eklenebilir -->
     </div>
 
-    <!-- Bootstrap JS (optional) -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  
 </body>
 </html>
